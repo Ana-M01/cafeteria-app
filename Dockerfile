@@ -1,4 +1,4 @@
-# Receta de la imagen del proyecto: la misma corre en el salón y en el host.
+# Receta de la imagen: la misma corre en el salón y en Render.
 FROM python:3.12-slim
 RUN useradd -m -u 1000 usuario
 USER usuario
@@ -7,5 +7,6 @@ WORKDIR /home/usuario/app
 COPY --chown=usuario requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY --chown=usuario . .
+ENV PORT=8765
 EXPOSE 8765
-CMD ["solara", "run", "app.py", "--host=0.0.0.0", "--production"]
+CMD ["sh", "-c", "exec solara run app.py --host=0.0.0.0 --port=$PORT --production"]
