@@ -26,6 +26,7 @@ def test_promedio_por_otro_camino():
                     and int(numero(fila[ANIO])) == ANIO_CONTROL):
                 valores.append(numero(fila[PROMEDIO]))
     assert promedio_pm25(cargar(), DEPTO, ANIO_CONTROL) == round(sum(valores) / len(valores), 1)
+    assert round(sum(valores) / len(valores), 1) == CIFRA_DE_CONTROL
 
 
 def test_cifra_de_control():
